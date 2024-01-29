@@ -13,22 +13,22 @@ async function getDetails(id) {
 }
 
 async function getDownloadLink(data) {
-    try {
-        const config = {
-            headers: {
-                "Content-Type": "application/json"
-            }
-        };
+    const downloadUrl = `https://www.terabox.com/share/list?app_id=250528&shorturl=${surlValue}&root=1`;
+  const downloadResponse = await axiosInstance.get(downloadUrl, { headers });
+  
+  try {
+    const result = downloadResponse.data.list[0].dlink;
+    return result;
+  } catch (error) {
+    console.log('Failed to get download link');
+  }
+}
 
-        const options = {
-            method: 'GET',
-            url: 'https://terabox-downloader.p.rapidapi.com/',
-            params: { url: '<REQUIRED>' },
-            headers: {
-                'X-RapidAPI-Key': '4f2bd0fc83msh5ff6c418f6b6c71p1a366cjsn1e9ed473356a',
-                'X-RapidAPI-Host': 'terabox-downloader.p.rapidapi.com'
-            }
-        };
+// Example usage
+const dlink = download('https://teraboxapp.com/s/1ZqumlUbwrc32c40geaQsVg');
+console.log(dlink);
+
+}
 
         try {
             const response = await axios.request(options);
