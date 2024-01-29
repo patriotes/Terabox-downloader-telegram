@@ -15,14 +15,14 @@ const sendFile = async (item, ctx) => {
     const data = await getDownloadLink(item);
 
     if (data.ok) {
-      try{
-        await ctx.replyWithDocument(data.downloadLink)
-      }catch(e){
-ctx.replyWithMarkdown(`${e.message}\n\nTry manually downloading from [here](${data.downloadLink})`);
-      }
-        
+        try {
+            await ctx.replyWithDocument(data.downloadLink);
+        } catch (e) {
+            ctx.replyWithMarkdown(`${e.message}\n\nTry manually downloading from [here](${data.downloadLink})`);
+        }
     }
 };
+
 
 module.exports = {
     parseList,
